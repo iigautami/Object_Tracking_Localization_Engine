@@ -25,4 +25,3 @@ Classes Used:
 5. Tracker Class: responsiblities- receive detections->compare with existing objects->match objects->update existing IDs->create IDs for new objects->Handle temporarily missing objects->remove permanently lost objects.
 6. MotionAnalyzer Class: reponsible for numerical analysis- position, displacement and speed
 7. Visualizer Class: reponsible for everything drawn on the OpenCV windows
->>>>>>> 74bdbc5 (explained classes which will be used.)
