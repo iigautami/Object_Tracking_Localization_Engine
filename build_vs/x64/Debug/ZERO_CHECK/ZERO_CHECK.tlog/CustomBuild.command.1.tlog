@@ -1,0 +1,10 @@
+^D:\OBJECT_TRACKING_LOCALIZATION_ENGINE\BUILD_VS\CMAKEFILES\0E2809B5AC23995565CC51B08A0D6F70\GENERATE.STAMP.RULE
+setlocal
+D:\CMake\bin\cmake.exe -SD:/Object_Tracking_Localization_Engine -BD:/Object_Tracking_Localization_Engine/build_vs --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/Object_Tracking_Localization_Engine/build_vs/ObjectTrackingEngine.slnx
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

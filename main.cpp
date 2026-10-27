@@ -1,5 +1,8 @@
 #include <opencv2/opencv.hpp>
+#include <algorithm>
+#include <cmath>
 #include <iostream>
+#include <filesystem>
 
 #include "Frame.h"
 #include "BoundingBox.h"
@@ -9,12 +12,15 @@
 #include "MotionAnalyzer.h"
 #include "Visualizer.h"
 
-int main()
+int main(int argc, char** argv)
 {
-    cv::VideoCapture video("video.mp4");
+    const std::filesystem::path videoPath = argc > 1
+        ? std::filesystem::path(argv[1])
+        : std::filesystem::path("Video.mp4");
+    cv::VideoCapture video(videoPath.string());
     if (!video.isOpened())
     {
-        std::cout << "Could not open video.\n";
+        std::cerr << "Could not open video: " << videoPath.string() << '\n';
         return -1;
     }
     MotionDetector detector(500);
@@ -22,9 +28,17 @@ int main()
     MotionAnalyzer analyzer(2.0);
     Visualizer visualizer;
     int frameNumber = 0;
+    const std::string windowName = "Object Tracking Engine";
+    constexpr int maxDisplayWidth = 1280;
+    constexpr int maxDisplayHeight = 720;
+    bool displayWindowSized = false;
+    cv::namedWindow(windowName, cv::WINDOW_NORMAL | cv::WINDOW_KEEPRATIO);
+
     while (true){
         cv::Mat image;
         if (!video.read(image))
+            break;
+        if (image.empty())
             break;
         frameNumber++;
         // Create Frame object
@@ -33,18 +47,40 @@ int main()
         // 1. Detect moving objects
         std::vector<BoundingBox> detections =detector.detect(frame);
         // 2. Track objects
-        tracker.update(detections);
+        tracker.update(detections, timestamp);
         // 3. Analyze and visualize
         for (auto& pair : tracker.getObjects()){
             TrackedObject& object =pair.second;
-            analyzer.analyze(object,1.0 / 30.0);
+            analyzer.analyze(object, object.getDeltaTime());
             visualizer.drawObject(image,object);
             visualizer.drawTrajectory(image,object);
+            std::cout << "frame=" << frameNumber
+                      << " id=" << object.getID()
+                      << " x=" << object.getCurrentCentroid().x
+                      << " y=" << object.getCurrentCentroid().y
+                      << " speed_px_s=" << object.getSpeed()
+                      << " direction=" << object.getDirection()
+                      << " status=" << object.getStatus()
+                      << " missed=" << object.getMissedFrames() << '\n';
         }
-        // 4. Draw statistics
-        visualizer.drawStatistics(image,tracker.getObjects().size(),30.0);
-        // 5. Display
-        cv::imshow("Object Tracking Engine",image);
+        // 4. Display
+        const double displayScale = std::min({
+            1.0,
+            static_cast<double>(maxDisplayWidth) / image.cols,
+            static_cast<double>(maxDisplayHeight) / image.rows
+        });
+        cv::Mat displayImage;
+        if (displayScale < 1.0)
+            cv::resize(image, displayImage, cv::Size(), displayScale, displayScale, cv::INTER_AREA);
+        else
+            displayImage = image;
+
+        if (!displayWindowSized)
+        {
+            cv::resizeWindow(windowName, displayImage.cols, displayImage.rows);
+            displayWindowSized = true;
+        }
+        cv::imshow(windowName, displayImage);
         // Press Q to quit
         if (cv::waitKey(1) == 'q')
             break;

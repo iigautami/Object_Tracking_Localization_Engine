@@ -1,0 +1,404 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{6173ED3F-C075-3382-B8B3-01CCA3E61772}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>ObjectTrackingEngine</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v145</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\Object_Tracking_Localization_Engine\build_vs\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">ObjectTrackingEngine.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">ObjectTrackingEngine</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
+    <LocalDebuggerWorkingDirectory Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Object_Tracking_Localization_Engine</LocalDebuggerWorkingDirectory>
+    <LocalDebuggerEnvironment Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PATH=C:/opencv/build/x64/vc16/bin;C:\Program Files\Python314\Scripts\;C:\Program Files\Python314\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\MinGW\bin;C:\Program Files\Git\cmd;C:\Users\igaut\Downloads\Git-2.53.0.2-64-bit.exe;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\nodejs\;C:\Program Files\MySQL\MySQL Server 8.0\bin;D:\CMake\bin;C:\Program Files\Microsoft SQL Server\170\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\dotnet\;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\opencv;C:\CMake;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\igaut\AppData\Local\Microsoft\WindowsApps;C:\Users\igaut\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\igaut\AppData\Local\Programs\Antigravity\bin;C:\Users\igaut\AppData\Local\Programs\Antigravity IDE\bin;C:\Users\igaut\AppData\Roaming\npm;D:\CMake\bin;C:\Users\igaut\.dotnet\tools;C:\Users\igaut\AppData\Local\Programs\Microsoft VS Code\bin\copilot-shim</LocalDebuggerEnvironment>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\Object_Tracking_Localization_Engine\build_vs\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">ObjectTrackingEngine.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">ObjectTrackingEngine</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
+    <LocalDebuggerWorkingDirectory Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Object_Tracking_Localization_Engine</LocalDebuggerWorkingDirectory>
+    <LocalDebuggerEnvironment Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PATH=C:/opencv/build/x64/vc16/bin;C:\Program Files\Python314\Scripts\;C:\Program Files\Python314\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\MinGW\bin;C:\Program Files\Git\cmd;C:\Users\igaut\Downloads\Git-2.53.0.2-64-bit.exe;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\nodejs\;C:\Program Files\MySQL\MySQL Server 8.0\bin;D:\CMake\bin;C:\Program Files\Microsoft SQL Server\170\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\dotnet\;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\opencv;C:\CMake;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\igaut\AppData\Local\Microsoft\WindowsApps;C:\Users\igaut\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\igaut\AppData\Local\Programs\Antigravity\bin;C:\Users\igaut\AppData\Local\Programs\Antigravity IDE\bin;C:\Users\igaut\AppData\Roaming\npm;D:\CMake\bin;C:\Users\igaut\.dotnet\tools;C:\Users\igaut\AppData\Local\Programs\Microsoft VS Code\bin\copilot-shim</LocalDebuggerEnvironment>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\Object_Tracking_Localization_Engine\build_vs\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">ObjectTrackingEngine.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">ObjectTrackingEngine</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
+    <LocalDebuggerWorkingDirectory Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/Object_Tracking_Localization_Engine</LocalDebuggerWorkingDirectory>
+    <LocalDebuggerEnvironment Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">PATH=C:/opencv/build/x64/vc16/bin;C:\Program Files\Python314\Scripts\;C:\Program Files\Python314\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\MinGW\bin;C:\Program Files\Git\cmd;C:\Users\igaut\Downloads\Git-2.53.0.2-64-bit.exe;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\nodejs\;C:\Program Files\MySQL\MySQL Server 8.0\bin;D:\CMake\bin;C:\Program Files\Microsoft SQL Server\170\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\dotnet\;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\opencv;C:\CMake;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\igaut\AppData\Local\Microsoft\WindowsApps;C:\Users\igaut\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\igaut\AppData\Local\Programs\Antigravity\bin;C:\Users\igaut\AppData\Local\Programs\Antigravity IDE\bin;C:\Users\igaut\AppData\Roaming\npm;D:\CMake\bin;C:\Users\igaut\.dotnet\tools;C:\Users\igaut\AppData\Local\Programs\Microsoft VS Code\bin\copilot-shim</LocalDebuggerEnvironment>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\Object_Tracking_Localization_Engine\build_vs\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">ObjectTrackingEngine.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">ObjectTrackingEngine</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</GenerateManifest>
+    <LocalDebuggerWorkingDirectory Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/Object_Tracking_Localization_Engine</LocalDebuggerWorkingDirectory>
+    <LocalDebuggerEnvironment Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">PATH=C:/opencv/build/x64/vc16/bin;C:\Program Files\Python314\Scripts\;C:\Program Files\Python314\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\MinGW\bin;C:\Program Files\Git\cmd;C:\Users\igaut\Downloads\Git-2.53.0.2-64-bit.exe;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\nodejs\;C:\Program Files\MySQL\MySQL Server 8.0\bin;D:\CMake\bin;C:\Program Files\Microsoft SQL Server\170\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\dotnet\;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\opencv;C:\CMake;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\igaut\AppData\Local\Microsoft\WindowsApps;C:\Users\igaut\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\igaut\AppData\Local\Programs\Antigravity\bin;C:\Users\igaut\AppData\Local\Programs\Antigravity IDE\bin;C:\Users\igaut\AppData\Roaming\npm;D:\CMake\bin;C:\Users\igaut\.dotnet\tools;C:\Users\igaut\AppData\Local\Programs\Microsoft VS Code\bin\copilot-shim</LocalDebuggerEnvironment>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "C:/opencv/build/include"</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <BufferSecurityCheck></BufferSecurityCheck>
+      <CallingConvention></CallingConvention>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <FloatingPointModel></FloatingPointModel>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\opencv\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\opencv\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>C:\opencv\build\x64\vc16\lib\opencv_world500d.lib;C:\opencv\build\x64\vc16\lib\opencv_world500d.lib;C:\opencv\build\x64\vc16\lib\opencv_world500d.lib;C:\opencv\build\x64\vc16\lib\opencv_world500d.lib;C:\opencv\build\x64\vc16\lib\opencv_world500d.lib;C:\opencv\build\x64\vc16\lib\opencv_world500d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <DataExecutionPrevention></DataExecutionPrevention>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImageHasSafeExceptionHandlers></ImageHasSafeExceptionHandlers>
+      <ImportLibrary>D:/Object_Tracking_Localization_Engine/build_vs/Debug/ObjectTrackingEngine.lib</ImportLibrary>
+      <LinkErrorReporting></LinkErrorReporting>
+      <ProgramDataBaseFile>D:/Object_Tracking_Localization_Engine/build_vs/Debug/ObjectTrackingEngine.pdb</ProgramDataBaseFile>
+      <RandomizedBaseAddress></RandomizedBaseAddress>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "C:/opencv/build/include"</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BufferSecurityCheck></BufferSecurityCheck>
+      <CallingConvention></CallingConvention>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <FloatingPointModel></FloatingPointModel>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\opencv\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\opencv\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>C:\opencv\build\x64\vc16\lib\opencv_world500.lib;C:\opencv\build\x64\vc16\lib\opencv_world500.lib;C:\opencv\build\x64\vc16\lib\opencv_world500.lib;C:\opencv\build\x64\vc16\lib\opencv_world500.lib;C:\opencv\build\x64\vc16\lib\opencv_world500.lib;C:\opencv\build\x64\vc16\lib\opencv_world500.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <DataExecutionPrevention></DataExecutionPrevention>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImageHasSafeExceptionHandlers></ImageHasSafeExceptionHandlers>
+      <ImportLibrary>D:/Object_Tracking_Localization_Engine/build_vs/Release/ObjectTrackingEngine.lib</ImportLibrary>
+      <LinkErrorReporting></LinkErrorReporting>
+      <ProgramDataBaseFile>D:/Object_Tracking_Localization_Engine/build_vs/Release/ObjectTrackingEngine.pdb</ProgramDataBaseFile>
+      <RandomizedBaseAddress></RandomizedBaseAddress>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "C:/opencv/build/include"</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BufferSecurityCheck></BufferSecurityCheck>
+      <CallingConvention></CallingConvention>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <FloatingPointModel></FloatingPointModel>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\opencv\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\opencv\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>C:\opencv\build\x64\vc16\lib\opencv_world500.lib;C:\opencv\build\x64\vc16\lib\opencv_world500.lib;C:\opencv\build\x64\vc16\lib\opencv_world500.lib;C:\opencv\build\x64\vc16\lib\opencv_world500.lib;C:\opencv\build\x64\vc16\lib\opencv_world500.lib;C:\opencv\build\x64\vc16\lib\opencv_world500.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <DataExecutionPrevention></DataExecutionPrevention>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImageHasSafeExceptionHandlers></ImageHasSafeExceptionHandlers>
+      <ImportLibrary>D:/Object_Tracking_Localization_Engine/build_vs/MinSizeRel/ObjectTrackingEngine.lib</ImportLibrary>
+      <LinkErrorReporting></LinkErrorReporting>
+      <ProgramDataBaseFile>D:/Object_Tracking_Localization_Engine/build_vs/MinSizeRel/ObjectTrackingEngine.pdb</ProgramDataBaseFile>
+      <RandomizedBaseAddress></RandomizedBaseAddress>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "C:/opencv/build/include"</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BufferSecurityCheck></BufferSecurityCheck>
+      <CallingConvention></CallingConvention>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <FloatingPointModel></FloatingPointModel>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\opencv\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\opencv\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>C:\opencv\build\x64\vc16\lib\opencv_world500.lib;C:\opencv\build\x64\vc16\lib\opencv_world500.lib;C:\opencv\build\x64\vc16\lib\opencv_world500.lib;C:\opencv\build\x64\vc16\lib\opencv_world500.lib;C:\opencv\build\x64\vc16\lib\opencv_world500.lib;C:\opencv\build\x64\vc16\lib\opencv_world500.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <DataExecutionPrevention></DataExecutionPrevention>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImageHasSafeExceptionHandlers></ImageHasSafeExceptionHandlers>
+      <ImportLibrary>D:/Object_Tracking_Localization_Engine/build_vs/RelWithDebInfo/ObjectTrackingEngine.lib</ImportLibrary>
+      <LinkErrorReporting></LinkErrorReporting>
+      <ProgramDataBaseFile>D:/Object_Tracking_Localization_Engine/build_vs/RelWithDebInfo/ObjectTrackingEngine.pdb</ProgramDataBaseFile>
+      <RandomizedBaseAddress></RandomizedBaseAddress>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\Object_Tracking_Localization_Engine\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/Object_Tracking_Localization_Engine/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+D:\CMake\bin\cmake.exe -SD:/Object_Tracking_Localization_Engine -BD:/Object_Tracking_Localization_Engine/build_vs --check-stamp-file D:/Object_Tracking_Localization_Engine/build_vs/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\opencv\build\OpenCVConfig-version.cmake;C:\opencv\build\OpenCVConfig.cmake;C:\opencv\build\x64\vc16\lib\OpenCVConfig.cmake;C:\opencv\build\x64\vc16\lib\OpenCVModules-debug.cmake;C:\opencv\build\x64\vc16\lib\OpenCVModules-release.cmake;C:\opencv\build\x64\vc16\lib\OpenCVModules.cmake;D:\CMake\share\cmake-4.5\Modules\CMakeCXXInformation.cmake;D:\CMake\share\cmake-4.5\Modules\CMakeCommonLanguageInclude.cmake;D:\CMake\share\cmake-4.5\Modules\CMakeGenericSystem.cmake;D:\CMake\share\cmake-4.5\Modules\CMakeInitializeConfigs.cmake;D:\CMake\share\cmake-4.5\Modules\CMakeLanguageInformation.cmake;D:\CMake\share\cmake-4.5\Modules\CMakeRCInformation.cmake;D:\CMake\share\cmake-4.5\Modules\CMakeSystemSpecificInformation.cmake;D:\CMake\share\cmake-4.5\Modules\CMakeSystemSpecificInitialize.cmake;D:\CMake\share\cmake-4.5\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\CMake\share\cmake-4.5\Modules\Compiler\MSVC-CXX.cmake;D:\CMake\share\cmake-4.5\Modules\Compiler\MSVC.cmake;D:\CMake\share\cmake-4.5\Modules\FindPackageHandleStandardArgs.cmake;D:\CMake\share\cmake-4.5\Modules\FindPackageMessage.cmake;D:\CMake\share\cmake-4.5\Modules\Internal\CMakeCXXLinkerInformation.cmake;D:\CMake\share\cmake-4.5\Modules\Internal\CMakeCommonLinkerInformation.cmake;D:\CMake\share\cmake-4.5\Modules\Linker\MSVC-CXX.cmake;D:\CMake\share\cmake-4.5\Modules\Linker\MSVC.cmake;D:\CMake\share\cmake-4.5\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;D:\CMake\share\cmake-4.5\Modules\Platform\Linker\Windows-MSVC.cmake;D:\CMake\share\cmake-4.5\Modules\Platform\Windows-Initialize.cmake;D:\CMake\share\cmake-4.5\Modules\Platform\Windows-MSVC-CXX.cmake;D:\CMake\share\cmake-4.5\Modules\Platform\Windows-MSVC.cmake;D:\CMake\share\cmake-4.5\Modules\Platform\Windows.cmake;D:\CMake\share\cmake-4.5\Modules\Platform\WindowsPaths.cmake;D:\Object_Tracking_Localization_Engine\build_vs\CMakeFiles\4.5.0-rc1\CMakeCXXCompiler.cmake;D:\Object_Tracking_Localization_Engine\build_vs\CMakeFiles\4.5.0-rc1\CMakeRCCompiler.cmake;D:\Object_Tracking_Localization_Engine\build_vs\CMakeFiles\4.5.0-rc1\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\Object_Tracking_Localization_Engine\build_vs\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/Object_Tracking_Localization_Engine/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+D:\CMake\bin\cmake.exe -SD:/Object_Tracking_Localization_Engine -BD:/Object_Tracking_Localization_Engine/build_vs --check-stamp-file D:/Object_Tracking_Localization_Engine/build_vs/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\opencv\build\OpenCVConfig-version.cmake;C:\opencv\build\OpenCVConfig.cmake;C:\opencv\build\x64\vc16\lib\OpenCVConfig.cmake;C:\opencv\build\x64\vc16\lib\OpenCVModules-debug.cmake;C:\opencv\build\x64\vc16\lib\OpenCVModules-release.cmake;C:\opencv\build\x64\vc16\lib\OpenCVModules.cmake;D:\CMake\share\cmake-4.5\Modules\CMakeCXXInformation.cmake;D:\CMake\share\cmake-4.5\Modules\CMakeCommonLanguageInclude.cmake;D:\CMake\share\cmake-4.5\Modules\CMakeGenericSystem.cmake;D:\CMake\share\cmake-4.5\Modules\CMakeInitializeConfigs.cmake;D:\CMake\share\cmake-4.5\Modules\CMakeLanguageInformation.cmake;D:\CMake\share\cmake-4.5\Modules\CMakeRCInformation.cmake;D:\CMake\share\cmake-4.5\Modules\CMakeSystemSpecificInformation.cmake;D:\CMake\share\cmake-4.5\Modules\CMakeSystemSpecificInitialize.cmake;D:\CMake\share\cmake-4.5\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\CMake\share\cmake-4.5\Modules\Compiler\MSVC-CXX.cmake;D:\CMake\share\cmake-4.5\Modules\Compiler\MSVC.cmake;D:\CMake\share\cmake-4.5\Modules\FindPackageHandleStandardArgs.cmake;D:\CMake\share\cmake-4.5\Modules\FindPackageMessage.cmake;D:\CMake\share\cmake-4.5\Modules\Internal\CMakeCXXLinkerInformation.cmake;D:\CMake\share\cmake-4.5\Modules\Internal\CMakeCommonLinkerInformation.cmake;D:\CMake\share\cmake-4.5\Modules\Linker\MSVC-CXX.cmake;D:\CMake\share\cmake-4.5\Modules\Linker\MSVC.cmake;D:\CMake\share\cmake-4.5\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;D:\CMake\share\cmake-4.5\Modules\Platform\Linker\Windows-MSVC.cmake;D:\CMake\share\cmake-4.5\Modules\Platform\Windows-Initialize.cmake;D:\CMake\share\cmake-4.5\Modules\Platform\Windows-MSVC-CXX.cmake;D:\CMake\share\cmake-4.5\Modules\Platform\Windows-MSVC.cmake;D:\CMake\share\cmake-4.5\Modules\Platform\Windows.cmake;D:\CMake\share\cmake-4.5\Modules\Platform\WindowsPaths.cmake;D:\Object_Tracking_Localization_Engine\build_vs\CMakeFiles\4.5.0-rc1\CMakeCXXCompiler.cmake;D:\Object_Tracking_Localization_Engine\build_vs\CMakeFiles\4.5.0-rc1\CMakeRCCompiler.cmake;D:\Object_Tracking_Localization_Engine\build_vs\CMakeFiles\4.5.0-rc1\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\Object_Tracking_Localization_Engine\build_vs\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule D:/Object_Tracking_Localization_Engine/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+D:\CMake\bin\cmake.exe -SD:/Object_Tracking_Localization_Engine -BD:/Object_Tracking_Localization_Engine/build_vs --check-stamp-file D:/Object_Tracking_Localization_Engine/build_vs/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\opencv\build\OpenCVConfig-version.cmake;C:\opencv\build\OpenCVConfig.cmake;C:\opencv\build\x64\vc16\lib\OpenCVConfig.cmake;C:\opencv\build\x64\vc16\lib\OpenCVModules-debug.cmake;C:\opencv\build\x64\vc16\lib\OpenCVModules-release.cmake;C:\opencv\build\x64\vc16\lib\OpenCVModules.cmake;D:\CMake\share\cmake-4.5\Modules\CMakeCXXInformation.cmake;D:\CMake\share\cmake-4.5\Modules\CMakeCommonLanguageInclude.cmake;D:\CMake\share\cmake-4.5\Modules\CMakeGenericSystem.cmake;D:\CMake\share\cmake-4.5\Modules\CMakeInitializeConfigs.cmake;D:\CMake\share\cmake-4.5\Modules\CMakeLanguageInformation.cmake;D:\CMake\share\cmake-4.5\Modules\CMakeRCInformation.cmake;D:\CMake\share\cmake-4.5\Modules\CMakeSystemSpecificInformation.cmake;D:\CMake\share\cmake-4.5\Modules\CMakeSystemSpecificInitialize.cmake;D:\CMake\share\cmake-4.5\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\CMake\share\cmake-4.5\Modules\Compiler\MSVC-CXX.cmake;D:\CMake\share\cmake-4.5\Modules\Compiler\MSVC.cmake;D:\CMake\share\cmake-4.5\Modules\FindPackageHandleStandardArgs.cmake;D:\CMake\share\cmake-4.5\Modules\FindPackageMessage.cmake;D:\CMake\share\cmake-4.5\Modules\Internal\CMakeCXXLinkerInformation.cmake;D:\CMake\share\cmake-4.5\Modules\Internal\CMakeCommonLinkerInformation.cmake;D:\CMake\share\cmake-4.5\Modules\Linker\MSVC-CXX.cmake;D:\CMake\share\cmake-4.5\Modules\Linker\MSVC.cmake;D:\CMake\share\cmake-4.5\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;D:\CMake\share\cmake-4.5\Modules\Platform\Linker\Windows-MSVC.cmake;D:\CMake\share\cmake-4.5\Modules\Platform\Windows-Initialize.cmake;D:\CMake\share\cmake-4.5\Modules\Platform\Windows-MSVC-CXX.cmake;D:\CMake\share\cmake-4.5\Modules\Platform\Windows-MSVC.cmake;D:\CMake\share\cmake-4.5\Modules\Platform\Windows.cmake;D:\CMake\share\cmake-4.5\Modules\Platform\WindowsPaths.cmake;D:\Object_Tracking_Localization_Engine\build_vs\CMakeFiles\4.5.0-rc1\CMakeCXXCompiler.cmake;D:\Object_Tracking_Localization_Engine\build_vs\CMakeFiles\4.5.0-rc1\CMakeRCCompiler.cmake;D:\Object_Tracking_Localization_Engine\build_vs\CMakeFiles\4.5.0-rc1\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\Object_Tracking_Localization_Engine\build_vs\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule D:/Object_Tracking_Localization_Engine/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+D:\CMake\bin\cmake.exe -SD:/Object_Tracking_Localization_Engine -BD:/Object_Tracking_Localization_Engine/build_vs --check-stamp-file D:/Object_Tracking_Localization_Engine/build_vs/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\opencv\build\OpenCVConfig-version.cmake;C:\opencv\build\OpenCVConfig.cmake;C:\opencv\build\x64\vc16\lib\OpenCVConfig.cmake;C:\opencv\build\x64\vc16\lib\OpenCVModules-debug.cmake;C:\opencv\build\x64\vc16\lib\OpenCVModules-release.cmake;C:\opencv\build\x64\vc16\lib\OpenCVModules.cmake;D:\CMake\share\cmake-4.5\Modules\CMakeCXXInformation.cmake;D:\CMake\share\cmake-4.5\Modules\CMakeCommonLanguageInclude.cmake;D:\CMake\share\cmake-4.5\Modules\CMakeGenericSystem.cmake;D:\CMake\share\cmake-4.5\Modules\CMakeInitializeConfigs.cmake;D:\CMake\share\cmake-4.5\Modules\CMakeLanguageInformation.cmake;D:\CMake\share\cmake-4.5\Modules\CMakeRCInformation.cmake;D:\CMake\share\cmake-4.5\Modules\CMakeSystemSpecificInformation.cmake;D:\CMake\share\cmake-4.5\Modules\CMakeSystemSpecificInitialize.cmake;D:\CMake\share\cmake-4.5\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\CMake\share\cmake-4.5\Modules\Compiler\MSVC-CXX.cmake;D:\CMake\share\cmake-4.5\Modules\Compiler\MSVC.cmake;D:\CMake\share\cmake-4.5\Modules\FindPackageHandleStandardArgs.cmake;D:\CMake\share\cmake-4.5\Modules\FindPackageMessage.cmake;D:\CMake\share\cmake-4.5\Modules\Internal\CMakeCXXLinkerInformation.cmake;D:\CMake\share\cmake-4.5\Modules\Internal\CMakeCommonLinkerInformation.cmake;D:\CMake\share\cmake-4.5\Modules\Linker\MSVC-CXX.cmake;D:\CMake\share\cmake-4.5\Modules\Linker\MSVC.cmake;D:\CMake\share\cmake-4.5\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;D:\CMake\share\cmake-4.5\Modules\Platform\Linker\Windows-MSVC.cmake;D:\CMake\share\cmake-4.5\Modules\Platform\Windows-Initialize.cmake;D:\CMake\share\cmake-4.5\Modules\Platform\Windows-MSVC-CXX.cmake;D:\CMake\share\cmake-4.5\Modules\Platform\Windows-MSVC.cmake;D:\CMake\share\cmake-4.5\Modules\Platform\Windows.cmake;D:\CMake\share\cmake-4.5\Modules\Platform\WindowsPaths.cmake;D:\Object_Tracking_Localization_Engine\build_vs\CMakeFiles\4.5.0-rc1\CMakeCXXCompiler.cmake;D:\Object_Tracking_Localization_Engine\build_vs\CMakeFiles\4.5.0-rc1\CMakeRCCompiler.cmake;D:\Object_Tracking_Localization_Engine\build_vs\CMakeFiles\4.5.0-rc1\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\Object_Tracking_Localization_Engine\build_vs\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="D:\Object_Tracking_Localization_Engine\main.cpp" />
+    <ClCompile Include="D:\Object_Tracking_Localization_Engine\Frame.cpp" />
+    <ClCompile Include="D:\Object_Tracking_Localization_Engine\BoundingBox.cpp" />
+    <ClCompile Include="D:\Object_Tracking_Localization_Engine\TrackedObject.cpp" />
+    <ClCompile Include="D:\Object_Tracking_Localization_Engine\MotionDetector.cpp" />
+    <ClCompile Include="D:\Object_Tracking_Localization_Engine\Tracker.cpp" />
+    <ClCompile Include="D:\Object_Tracking_Localization_Engine\MotionAnalyzer.cpp" />
+    <ClCompile Include="D:\Object_Tracking_Localization_Engine\Visualizer.cpp" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="D:\Object_Tracking_Localization_Engine\build_vs\ZERO_CHECK.vcxproj">
+      <Project>{EDDC161D-44C8-3B61-876A-6AF40F288270}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,7 @@
+{
+    "cmake.configureOnOpen": true,
+    "cmake.useCMakePresets": "always",
+    "cmake.configurePreset": "msvc-x64",
+    "cmake.buildPreset": "msvc-debug",
+    "code-runner.showRunCommandInEditorTitle": false
+}

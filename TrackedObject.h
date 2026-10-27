@@ -17,6 +17,8 @@ private:
     std::vector<cv::Point2f> trajectory;
 
     double speed;
+    double previousTimestamp;
+    double currentTimestamp;
 
     std::string direction;
     std::string status;
@@ -24,9 +26,10 @@ private:
     int missedFrames;
 
 public:
-    TrackedObject(int id, const BoundingBox& box);
+    TrackedObject(int id, const BoundingBox& box, double timestamp = 0.0);
 
-    void update(const BoundingBox& newBox);
+    void update(const BoundingBox& newBox, double timestamp = 0.0);
+    void setMotion(double speed, const std::string& direction, const std::string& status);
 
     int getID() const;
 
@@ -37,6 +40,7 @@ public:
     cv::Point2f getPreviousCentroid() const;
 
     double getSpeed() const;
+    double getDeltaTime() const;
 
     std::string getDirection() const;
 

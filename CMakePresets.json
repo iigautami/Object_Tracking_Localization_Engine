@@ -1,0 +1,28 @@
+{
+    "version": 3,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 21,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "msvc-x64",
+            "displayName": "MSVC x64 with installed OpenCV",
+            "generator": "Visual Studio 18 2026",
+            "architecture": "x64",
+            "binaryDir": "${sourceDir}/build_vs",
+            "cacheVariables": {
+                "OpenCV_DIR": "C:/opencv/build"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "msvc-debug",
+            "displayName": "MSVC Debug",
+            "configurePreset": "msvc-x64",
+            "configuration": "Debug"
+        }
+    ]
+}

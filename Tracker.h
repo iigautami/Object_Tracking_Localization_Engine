@@ -22,7 +22,8 @@ public:
     );
 
     void update(
-        const std::vector<BoundingBox>& detections
+        const std::vector<BoundingBox>& detections,
+        double timestamp = 0.0
     );
 
     std::map<int, TrackedObject>& getObjects();

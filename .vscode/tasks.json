@@ -1,0 +1,31 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "CMake: Configure MSVC x64",
+            "type": "process",
+            "command": "D:/CMake/bin/cmake.exe",
+            "args": ["--preset", "msvc-x64"],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "CMake: Build MSVC x64 Debug",
+            "type": "process",
+            "command": "D:/CMake/bin/cmake.exe",
+            "args": ["--build", "--preset", "msvc-debug", "--parallel"],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "dependsOn": ["CMake: Configure MSVC x64"],
+            "dependsOrder": "sequence",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$msCompile"]
+        }
+    ]
+}

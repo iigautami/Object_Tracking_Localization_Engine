@@ -14,12 +14,6 @@ public:
         const TrackedObject& object
     );
 
-    void drawStatistics(
-        cv::Mat& frame,
-        int objectCount,
-        double fps
-    );
-
     void drawTrajectory(
         cv::Mat& frame,
         const TrackedObject& object

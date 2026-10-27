@@ -1,6 +1,6 @@
 #include "TrackedObject.h"
 
-TrackedObject::TrackedObject(int id, const BoundingBox& box)
+TrackedObject::TrackedObject(int id, const BoundingBox& box, double timestamp)
 {
     this->id = id;
     boundingBox = box;
@@ -11,15 +11,19 @@ TrackedObject::TrackedObject(int id, const BoundingBox& box)
     trajectory.push_back(currentCentroid);
 
     speed = 0.0;
+    previousTimestamp = timestamp;
+    currentTimestamp = timestamp;
     direction = "STATIONARY";
     status = "STATIONARY";
 
     missedFrames = 0;
 }
 
-void TrackedObject::update(const BoundingBox& newBox)
+void TrackedObject::update(const BoundingBox& newBox, double timestamp)
 {
     previousCentroid = currentCentroid;
+    previousTimestamp = currentTimestamp;
+    currentTimestamp = timestamp;
 
     boundingBox = newBox;
 
@@ -28,6 +32,13 @@ void TrackedObject::update(const BoundingBox& newBox)
     trajectory.push_back(currentCentroid);
 
     missedFrames = 0;
+}
+
+void TrackedObject::setMotion(double newSpeed, const std::string& newDirection, const std::string& newStatus)
+{
+    speed = newSpeed;
+    direction = newDirection;
+    status = newStatus;
 }
 
 int TrackedObject::getID() const
@@ -53,6 +64,11 @@ cv::Point2f TrackedObject::getPreviousCentroid() const
 double TrackedObject::getSpeed() const
 {
     return speed;
+}
+
+double TrackedObject::getDeltaTime() const
+{
+    return currentTimestamp - previousTimestamp;
 }
 
 std::string TrackedObject::getDirection() const

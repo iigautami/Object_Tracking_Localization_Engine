@@ -9,7 +9,7 @@ ObjectTracker::ObjectTracker(double maxDistance, int maxMissed)
     maxMatchDistance = maxDistance;
     maxMissedFrames = maxMissed;
 }
-void ObjectTracker::update(const std::vector<BoundingBox>& detections){
+void ObjectTracker::update(const std::vector<BoundingBox>& detections, double timestamp){
     std::vector<bool> detectionUsed(detections.size(),false);
     // Match existing objects
     for (auto& pair : objects)
@@ -31,9 +31,7 @@ void ObjectTracker::update(const std::vector<BoundingBox>& detections){
             }
         }
         if (closestIndex != -1 && closestDistance < maxMatchDistance){
-            object.update(
-                detections[closestIndex]
-            );
+            object.update(detections[closestIndex], timestamp);
             detectionUsed[closestIndex] = true;
         }
         else{
@@ -44,7 +42,7 @@ void ObjectTracker::update(const std::vector<BoundingBox>& detections){
     for (int i = 0; i < detections.size();i++){
         if (!detectionUsed[i])
         {
-            TrackedObject object(nextID,detections[i]);
+            TrackedObject object(nextID, detections[i], timestamp);
             objects.emplace(nextID,object);
             nextID++;
         }
