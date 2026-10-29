@@ -172,6 +172,29 @@ Input & Any video format readable by OpenCV \texttt{videoio}; the demonstration 
 \end{tabular}
 \end{table}
 
+\subsection{Technology Stack}
+Table~\ref{tab:stack} lists the technologies used to build and run the project, the role each one plays, and the reason it was chosen.
+
+\begin{table}[H]
+\centering
+\caption{Technology stack of the Object Tracking Engine}
+\label{tab:stack}
+\small
+\begin{tabular}{@{}p{2.9cm}p{3.6cm}p{8.5cm}@{}}
+\toprule
+\textbf{Layer} & \textbf{Technology} & \textbf{Role and reason}\\
+\midrule
+Programming language & C++17 & Compiled and fast enough to process about 30 video frames per second; supports classes, operator overloading, \texttt{const}-correctness and RAII.\\
+Standard library & \texttt{std::vector}, \texttt{std::map}, \texttt{std::string}, \texttt{std::filesystem}, \texttt{<cmath>} & Containers for detections, tracked objects and trajectories; string labels; command-line video path; distance and speed calculations.\\
+Computer-vision library & OpenCV 5 (\texttt{core}, \texttt{geometry}, \texttt{imgproc}, \texttt{video}, \texttt{videoio}, \texttt{highgui}) & Video reading (\texttt{VideoCapture}), image type (\texttt{cv::Mat}), MOG2 background subtraction, thresholding, morphology, contour analysis, drawing functions and the display window.\\
+Build system & CMake 3.16+ with \texttt{CMakePresets.json} & Finds OpenCV, lists the eight source files and links them into one executable; the preset configures a Visual Studio x64 build with one command.\\
+Compiler / IDE & MSVC (Visual Studio) & Required to match the installed OpenCV binaries; \texttt{CMakeLists.txt} stops the build if another compiler is used.\\
+Platform & Windows, x64 & Target environment for the installed OpenCV libraries and DLLs.\\
+Input / output & Video file (\texttt{Video.mp4}); OpenCV window and console & Any format readable by OpenCV \texttt{videoio} is accepted; results are shown live and printed as a text log (no video file is saved).\\
+\bottomrule
+\end{tabular}
+\end{table}
+
 % =====================================================================
 \section{Scope and Feature Set}
 % =====================================================================
