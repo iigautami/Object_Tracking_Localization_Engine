@@ -29,6 +29,7 @@ int main(int argc, char** argv)
     Visualizer visualizer;
     int frameNumber = 0;
     const std::string windowName = "Object Tracking Engine";
+    //constexpr- constant expression
     constexpr int maxDisplayWidth = 1280;
     constexpr int maxDisplayHeight = 720;
     bool displayWindowSized = false;
@@ -44,9 +45,9 @@ int main(int argc, char** argv)
         // Create Frame object
         double timestamp = video.get(cv::CAP_PROP_POS_MSEC) / 1000.0;
         Frame frame(image,frameNumber,timestamp);
-        // 1. Detect moving objects
+        // 1. Detect moving objects and returns list of boxes
         std::vector<BoundingBox> detections =detector.detect(frame);
-        // 2. Track objects
+        // 2. Updates the Tracked objects
         tracker.update(detections, timestamp);
         // 3. Analyze and visualize
         for (auto& pair : tracker.getObjects()){

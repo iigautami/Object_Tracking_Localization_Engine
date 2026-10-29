@@ -17,6 +17,7 @@ MotionDetector::detect(const Frame& frame)
         return detections;
 
     cv::Mat foregroundMask;
+    
     backgroundSubtractor->apply(image, foregroundMask);
     // Remove noise
     cv::threshold(foregroundMask,foregroundMask,200,255,cv::THRESH_BINARY);
