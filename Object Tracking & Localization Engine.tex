@@ -18,13 +18,19 @@
 \usepackage{booktabs}
 \usepackage{array}
 \usepackage{caption}
-\usepackage{subcaption}
 \usepackage{adjustbox}
 \usepackage{titlesec}
 \titleformat{\chapter}[display]{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
 \titlespacing*{\chapter}{0pt}{0pt}{20pt}
 
 \geometry{margin=1in}
+\captionsetup{font=small,labelfont=bf,labelsep=colon,skip=6pt}
+% let text and floats share pages so no large blank areas remain
+\renewcommand{\topfraction}{0.95}
+\renewcommand{\bottomfraction}{0.95}
+\renewcommand{\textfraction}{0.05}
+\renewcommand{\floatpagefraction}{0.7}
+\setcounter{topnumber}{3}\setcounter{bottomnumber}{3}\setcounter{totalnumber}{6}
 \emergencystretch=3em
 \hypersetup{colorlinks=true,linkcolor=blue!50!black,urlcolor=blue!50!black,citecolor=blue!50!black}
 
@@ -115,17 +121,6 @@
 \chapter{Object Tracking Engine}
 \chapterauthor{Gautami Yeshwant Deshpande (251123)\\Abhipsa Mishra (251101)}
 
-\begin{center}
-\small
-\begin{tabular}{@{}rl@{}}
-\textbf{Guide:} & Dr.\ Anoop Jacob Thomas\\
-\textbf{Department:} & Computer Science and Engineering\\
-\textbf{Institute:} & Indian Institute of Information Technology, Tiruchirappalli\\
-\textbf{Course stage:} & Second Year, Semester III (C++ OOP Mini-Project)
-\end{tabular}
-\end{center}
-\vspace{4pt}
-
 % =====================================================================
 \section{Introduction and Problem Statement}
 % =====================================================================
@@ -153,6 +148,8 @@ The user starts the program, optionally passing the path of a video file; if no 
 At the same time, one log line per object per frame is printed to the console. Pressing \texttt{q} stops the program.
 
 \subsection{Software Requirements}
+The development and runtime environment of the project is summarised in Table~\ref{tab:env}.
+
 \begin{table}[H]
 \centering
 \caption{Development and runtime environment}
@@ -179,18 +176,18 @@ Table~\ref{tab:stack} lists the technologies used to build and run the project, 
 \centering
 \caption{Technology stack of the Object Tracking Engine}
 \label{tab:stack}
-\small
-\begin{tabular}{@{}p{2.9cm}p{3.6cm}p{8.5cm}@{}}
+\footnotesize
+\begin{tabular}{@{}p{2.7cm}p{4.2cm}p{8.1cm}@{}}
 \toprule
 \textbf{Layer} & \textbf{Technology} & \textbf{Role and reason}\\
 \midrule
-Programming language & C++17 & Compiled and fast enough to process about 30 video frames per second; supports classes, operator overloading, \texttt{const}-correctness and RAII.\\
-Standard library & \texttt{std::vector}, \texttt{std::map}, \texttt{std::string}, \texttt{std::filesystem}, \texttt{<cmath>} & Containers for detections, tracked objects and trajectories; string labels; command-line video path; distance and speed calculations.\\
-Computer-vision library & OpenCV 5 (\texttt{core}, \texttt{geometry}, \texttt{imgproc}, \texttt{video}, \texttt{videoio}, \texttt{highgui}) & Video reading (\texttt{VideoCapture}), image type (\texttt{cv::Mat}), MOG2 background subtraction, thresholding, morphology, contour analysis, drawing functions and the display window.\\
-Build system & CMake 3.16+ with \texttt{CMakePresets.json} & Finds OpenCV, lists the eight source files and links them into one executable; the preset configures a Visual Studio x64 build with one command.\\
-Compiler / IDE & MSVC (Visual Studio) & Required to match the installed OpenCV binaries; \texttt{CMakeLists.txt} stops the build if another compiler is used.\\
-Platform & Windows, x64 & Target environment for the installed OpenCV libraries and DLLs.\\
-Input / output & Video file (\texttt{Video.mp4}); OpenCV window and console & Any format readable by OpenCV \texttt{videoio} is accepted; results are shown live and printed as a text log (no video file is saved).\\
+Language & C++17 & Compiled and fast enough for about 30 frames per second; classes, operator overloading, \texttt{const}-correctness, RAII.\\
+Standard library & \texttt{vector}, \texttt{map}, \texttt{string}, \texttt{filesystem}, \texttt{cmath} & Detections, tracked objects and trajectories; labels; video path; distance and speed.\\
+Vision library & OpenCV 5 (\texttt{core}, \texttt{geometry}, \texttt{imgproc}, \texttt{video}, \texttt{videoio}, \texttt{highgui}) & Video reading, \texttt{cv::Mat}, MOG2 background subtraction, morphology, contours, drawing and display window.\\
+Build system & CMake 3.16+ with \texttt{CMakePresets.json} & Finds OpenCV and links the eight source files into one executable.\\
+Compiler / IDE & MSVC (Visual Studio) & Matches the installed OpenCV binaries; enforced in \texttt{CMakeLists.txt}.\\
+Platform & Windows, x64 & Target for the installed OpenCV libraries and DLLs.\\
+Input / output & \texttt{Video.mp4}; OpenCV window and console & Any format readable by OpenCV \texttt{videoio}; results shown live and logged (no video file saved).\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -222,27 +219,29 @@ Figure~\ref{fig:pipeline} shows how data flows through the system for every fram
 
 \begin{figure}[H]
 \centering
-\begin{tikzpicture}
-\node[io] (video) {\textbf{Video file}\\{\scriptsize \texttt{Video.mp4} or path given on the command line}};
-\node[stage, below=1.1cm of video] (cap) {\textbf{cv::VideoCapture $\rightarrow$ Frame}\\{\scriptsize image, frame number, timestamp}};
-\node[stage, below=1.1cm of cap] (det) {\textbf{MotionDetector}\\{\scriptsize MOG2 $\rightarrow$ threshold $\rightarrow$ open/close $\rightarrow$ contours $\rightarrow$ area filter}};
-\node[stage, below=1.1cm of det] (trk) {\textbf{ObjectTracker}\\{\scriptsize nearest-centroid matching, ID assignment, removal of lost objects}};
-\node[stage, below=1.1cm of trk] (ana) {\textbf{MotionAnalyzer}\\{\scriptsize speed, direction, status}};
-\node[stage, below=1.1cm of ana] (vis) {\textbf{Visualizer}\\{\scriptsize bounding box, centroid, label, trajectory}};
-\node[io, below=1.1cm of vis] (out) {\textbf{Output}\\{\scriptsize annotated window (\texttt{cv::imshow}) and console log}};
-\draw[flow] (video) -- (cap) node[midway, right=5pt, font=\scriptsize] {compressed frames};
-\draw[flow] (cap) -- (det) node[midway, right=5pt, font=\scriptsize\ttfamily] {Frame};
-\draw[flow] (det) -- (trk) node[midway, right=5pt, font=\scriptsize\ttfamily] {std::vector<BoundingBox>};
-\draw[flow] (trk) -- (ana) node[midway, right=5pt, font=\scriptsize\ttfamily] {TrackedObject (one per ID)};
-\draw[flow] (ana) -- (vis) node[midway, right=5pt, font=\scriptsize] {object with speed, direction, status};
-\draw[flow] (vis) -- (out) node[midway, right=5pt, font=\scriptsize\ttfamily] {annotated cv::Mat};
-\end{tikzpicture}
-\caption{Processing pipeline of the Object Tracking Engine (one iteration per video frame).}
+\adjustbox{max width=\textwidth}{%
+\begin{tikzpicture}[bx/.style={draw, rounded corners=3pt, fill=blue!7, minimum width=3.5cm, minimum height=1.7cm, text width=3.3cm, align=center, font=\footnotesize},
+  io2/.style={bx, fill=gray!15}]
+\node[io2] (video) at (0,0) {\textbf{Video file}\\{\scriptsize \texttt{Video.mp4} or command-line path}};
+\node[bx] (cap) at (4.5,0) {\textbf{VideoCapture $\rightarrow$ Frame}\\{\scriptsize image, frame number, timestamp}};
+\node[bx] (det) at (9.0,0) {\textbf{MotionDetector}\\{\scriptsize MOG2, threshold, open/close, contours, area filter}};
+\node[bx] (trk) at (13.5,0) {\textbf{ObjectTracker}\\{\scriptsize nearest-centroid matching, ID assignment, removal of lost objects}};
+\node[bx] (ana) at (13.5,-3.0) {\textbf{MotionAnalyzer}\\{\scriptsize speed, direction, status}};
+\node[bx] (vis) at (9.0,-3.0) {\textbf{Visualizer}\\{\scriptsize bounding box, centroid, label, trajectory}};
+\node[io2] (out) at (4.5,-3.0) {\textbf{Output}\\{\scriptsize annotated window (\texttt{cv::imshow}) and console log}};
+\draw[flow] (video) -- (cap) node[midway, above, font=\tiny] {frames};
+\draw[flow] (cap) -- (det) node[midway, above, font=\tiny\ttfamily] {Frame};
+\draw[flow] (det) -- (trk) node[midway, above, font=\tiny\ttfamily, align=center] {vector<\\BoundingBox>};
+\draw[flow] (trk) -- (ana) node[midway, right, font=\tiny\ttfamily, align=left] {TrackedObject\\(one per ID)};
+\draw[flow] (ana) -- (vis) node[midway, above, font=\tiny, align=center] {speed, direction,\\status};
+\draw[flow] (vis) -- (out) node[midway, above, font=\tiny\ttfamily, align=center] {annotated\\cv::Mat};
+\end{tikzpicture}}
+\caption{Processing pipeline of the Object Tracking Engine (one iteration per video frame; the second row is read right to left).}
 \label{fig:pipeline}
 \end{figure}
 
 \subsection{Class Design and Associations}
-The program consists of seven classes. Table~\ref{tab:classes} summarises their responsibilities and Figure~\ref{fig:class} shows the relations between them.
+The program consists of seven classes. Table~\ref{tab:classes} summarises their responsibilities and Figure~\ref{fig:class} shows the relations between them. The OOP concepts used by these classes are demonstrated with code in Section~\ref{sec:oop}.
 
 \begin{table}[H]
 \centering
@@ -264,7 +263,7 @@ The program consists of seven classes. Table~\ref{tab:classes} summarises their 
 \end{tabular}
 \end{table}
 
-\begin{figure}[p]
+\begin{figure}[H]
 \centering
 \adjustbox{max width=\textwidth, max height=0.86\textheight}{%
 \begin{tikzpicture}
@@ -425,11 +424,12 @@ The project does not define its own class hierarchy, because the problem is natu
 \section{OOP Concepts Demonstrated in the Code}
 \label{sec:oop}
 % =====================================================================
-This section shows, using the actual source code, how the main object-oriented concepts are applied.
+This section shows, using the actual source code, how the main object-oriented concepts are applied. Table~\ref{tab:oop-map} at the end of the section summarises where each concept appears.
 
 \subsection{Encapsulation and Data Hiding}
-Every class keeps its data private and offers read access through \texttt{const} member functions. \texttt{BoundingBox} is a typical example: no outside code can put it in an inconsistent state, and the derived values (centroid, area, \texttt{cv::Rect}) are computed on demand rather than stored.
+Every class keeps its data private and offers read access through \texttt{const} member functions. \texttt{BoundingBox} (Listing~\ref{lst:bbox-h}) is a typical example: no outside code can put it in an inconsistent state, and the derived values (centroid, area, \texttt{cv::Rect}) are computed on demand rather than stored.
 
+\begin{minipage}{\linewidth}
 \begin{lstlisting}[caption={\texttt{BoundingBox.h}: private data, public \texttt{const} interface.}, label={lst:bbox-h}]
 class BoundingBox
 {
@@ -457,9 +457,11 @@ public:
     BoundingBox operator-(const cv::Point2f& offset) const;
 };
 \end{lstlisting}
+\end{minipage}
 
-\texttt{TrackedObject} goes one step further: its state can only change through the controlled operations \texttt{update()}, \texttt{setMotion()}, \texttt{incrementMissedFrames()} and \texttt{resetMissedFrames()}. In particular, \texttt{update()} guarantees that the previous and current centroids and timestamps always move forward together, which the analyser relies on.
+\texttt{TrackedObject} goes one step further: its state can only change through the controlled operations \texttt{update()}, \texttt{setMotion()}, \texttt{incrementMissedFrames()} and \texttt{resetMissedFrames()}. In particular, \texttt{update()} guarantees that the previous and current centroids and timestamps always move forward together, which the analyser relies on (Listing~\ref{lst:update}).
 
+\begin{minipage}{\linewidth}
 \begin{lstlisting}[caption={\texttt{TrackedObject::update()} keeps position, time and history consistent.}, label={lst:update}]
 void TrackedObject::update(const BoundingBox& newBox, double timestamp)
 {
@@ -474,10 +476,12 @@ void TrackedObject::update(const BoundingBox& newBox, double timestamp)
     missedFrames = 0;
 }
 \end{lstlisting}
+\end{minipage}
 
 \subsection{Constructors and Constructor Overloading}
-\texttt{BoundingBox} provides a default constructor (an empty box at the origin) and a parameterised one. \texttt{Frame} does the same. In \texttt{Frame}, the parameterised constructor calls \texttt{clone()} on the image, so the \texttt{Frame} owns an independent copy: later drawing on the original image in \texttt{main()} cannot affect the data that the detector processes.
+\texttt{BoundingBox} provides a default constructor (an empty box at the origin) and a parameterised one. \texttt{Frame} does the same (Listing~\ref{lst:ctor}). In \texttt{Frame}, the parameterised constructor calls \texttt{clone()} on the image, so the \texttt{Frame} owns an independent copy: later drawing on the original image in \texttt{main()} cannot affect the data that the detector processes.
 
+\begin{minipage}{\linewidth}
 \begin{lstlisting}[caption={Overloaded constructors of \texttt{BoundingBox} and \texttt{Frame}.}, label={lst:ctor}]
 BoundingBox::BoundingBox()
 {
@@ -502,10 +506,12 @@ Frame::Frame(const cv::Mat& img, int number, double time)
     timestamp = time;
 }
 \end{lstlisting}
+\end{minipage}
 
 \subsection{Default Arguments}
-The tunable classes take their parameters through constructors with default values, so a component can be created with a recommended configuration or customised at the call site. In \texttt{main()} the defaults are overridden explicitly: \texttt{MotionDetector detector(500);}, \texttt{ObjectTracker tracker(80.0, 5);} and \texttt{MotionAnalyzer analyzer(2.0);}.
+The tunable classes take their parameters through constructors with default values, so a component can be created with a recommended configuration or customised at the call site (Listing~\ref{lst:default}). In \texttt{main()} the defaults are overridden explicitly: \texttt{MotionDetector detector(500);}, \texttt{ObjectTracker tracker(80.0, 5);} and \texttt{MotionAnalyzer analyzer(2.0);}.
 
+\begin{minipage}{\linewidth}
 \begin{lstlisting}[caption={Constructors with default arguments (declarations).}, label={lst:default}]
 MotionDetector(int minArea = 500);                 // MotionDetector.h
 MotionAnalyzer(double threshold = 2.0);            // MotionAnalyzer.h
@@ -514,10 +520,12 @@ ObjectTracker(double maxDistance = 80.0,           // Tracker.h
 TrackedObject(int id, const BoundingBox& box,      // TrackedObject.h
               double timestamp = 0.0);
 \end{lstlisting}
+\end{minipage}
 
 \subsection{Operator Overloading}
-\texttt{BoundingBox} overloads \texttt{+} and \texttt{-} so that a box can be translated by a \texttt{cv::Point2f} offset with natural syntax: \texttt{BoundingBox moved = box + offset;}. Both operators are \texttt{const} and return a new box, leaving the original unchanged; the size is preserved. The floating-point offset is truncated to whole pixels because the box stores integer coordinates.
+\texttt{BoundingBox} overloads \texttt{+} and \texttt{-} so that a box can be translated by a \texttt{cv::Point2f} offset with natural syntax: \texttt{BoundingBox moved = box + offset;}. Both operators are \texttt{const} and return a new box, leaving the original unchanged; the size is preserved. The floating-point offset is truncated to whole pixels because the box stores integer coordinates (Listing~\ref{lst:operators}).
 
+\begin{minipage}{\linewidth}
 \begin{lstlisting}[caption={Overloaded \texttt{+} and \texttt{-} operators, and the centroid computation.}, label={lst:operators}]
 cv::Point2f BoundingBox::getCentroid() const
 {
@@ -547,10 +555,12 @@ BoundingBox BoundingBox::operator-(const cv::Point2f& offset) const
     );
 }
 \end{lstlisting}
+\end{minipage}
 
 \subsection{Composition and Ownership of Objects}
-The tracker is the clearest example of composition. It owns all tracked objects in a \texttt{std::map} keyed by ID; \texttt{nextID} guarantees that IDs are never reused during a run. Because the objects are stored by value, creation and destruction of a \texttt{TrackedObject} are tied to the tracker's own bookkeeping, with no manual \texttt{new} or \texttt{delete} anywhere in the project.
+The tracker is the clearest example of composition. It owns all tracked objects in a \texttt{std::map} keyed by ID; \texttt{nextID} guarantees that IDs are never reused during a run. Because the objects are stored by value, creation and destruction of a \texttt{TrackedObject} are tied to the tracker's own bookkeeping, with no manual \texttt{new} or \texttt{delete} anywhere in the project (Listing~\ref{lst:tracker-h}).
 
+\begin{minipage}{\linewidth}
 \begin{lstlisting}[caption={\texttt{Tracker.h}: \texttt{ObjectTracker} owns its \texttt{TrackedObject}s.}, label={lst:tracker-h}]
 class ObjectTracker
 {
@@ -571,10 +581,12 @@ public:
     std::map<int, TrackedObject>& getObjects();
 };
 \end{lstlisting}
+\end{minipage}
 
 \subsection{Abstraction and Separation of Responsibilities}
-Each stage of the pipeline is hidden behind a one- or two-function interface. The caller does not need to know that detection uses MOG2 or that matching is greedy; it only needs \texttt{detect()}, \texttt{update()}, \texttt{analyze()} and \texttt{draw*()}. This makes it possible to replace the internals of one class (for example, a better matching algorithm in \texttt{ObjectTracker}) without touching the others. The main loop below reads almost like the problem statement.
+Each stage of the pipeline is hidden behind a one- or two-function interface. The caller does not need to know that detection uses MOG2 or that matching is greedy; it only needs \texttt{detect()}, \texttt{update()}, \texttt{analyze()} and \texttt{draw*()}. This makes it possible to replace the internals of one class (for example, a better matching algorithm in \texttt{ObjectTracker}) without touching the others. The main loop (Listing~\ref{lst:main}) reads almost like the problem statement.
 
+\begin{minipage}{\linewidth}
 \begin{lstlisting}[caption={Core of the main loop: each stage is a single call on a dedicated object.}, label={lst:main}]
 Frame frame(image, frameNumber, timestamp);
 // 1. Detect moving objects
@@ -590,14 +602,16 @@ for (auto& pair : tracker.getObjects()) {
     // ... console log ...
 }
 \end{lstlisting}
+\end{minipage}
 
 \subsection{Const-Correctness}
 Accessors are declared \texttt{const}, inputs are passed as \texttt{const} references (\texttt{const BoundingBox\&}, \texttt{const Frame\&}, \texttt{const TrackedObject\&}), and the trajectory is exposed as a \texttt{const std::vector<cv::Point2f>\&} to avoid copying a growing vector. For instance, \texttt{MotionDetector::detect(const Frame\&)} promises not to modify the frame, and \texttt{Visualizer::drawObject()} takes the object as \texttt{const}, documenting that drawing never changes tracking state. Only \texttt{MotionAnalyzer::analyze()} receives a modifiable \texttt{TrackedObject\&}, which makes it easy to see which class is allowed to change motion data.
 
 \subsection{Polymorphism through an Abstract Interface and RAII}
 \label{sec:polymorphism}
-\texttt{MotionDetector} stores its background model as a \texttt{cv::\allowbreak Ptr<\allowbreak cv::\allowbreak BackgroundSubtractor>} (the abstract base class) and initialises it with the MOG2 implementation. The call to \texttt{apply()} is dispatched at run time to \texttt{BackgroundSubtractorMOG2}, so the detector would work unchanged with another subtractor such as KNN. The smart pointer also illustrates RAII: the model is released automatically when the detector is destroyed, just as \texttt{cv::Mat} images and the \texttt{cv::VideoCapture} release their resources without explicit clean-up code.
+\texttt{MotionDetector} stores its background model as a \texttt{cv::\allowbreak Ptr<\allowbreak cv::\allowbreak BackgroundSubtractor>} (the abstract base class) and initialises it with the MOG2 implementation. The call to \texttt{apply()} is dispatched at run time to \texttt{BackgroundSubtractorMOG2}, so the detector would work unchanged with another subtractor such as KNN (Listing~\ref{lst:poly}). The smart pointer also illustrates RAII: the model is released automatically when the detector is destroyed, just as \texttt{cv::Mat} images and the \texttt{cv::VideoCapture} release their resources without explicit clean-up code.
 
+\begin{minipage}{\linewidth}
 \begin{lstlisting}[caption={Programming to the abstract \texttt{cv::BackgroundSubtractor} interface.}, label={lst:poly}]
 // MotionDetector.h
 cv::Ptr<cv::BackgroundSubtractor> backgroundSubtractor;
@@ -611,26 +625,27 @@ MotionDetector::MotionDetector(int minArea)
 ...
 backgroundSubtractor->apply(image, foregroundMask);   // virtual call
 \end{lstlisting}
+\end{minipage}
 
 \begin{table}[H]
 \centering
 \caption{Where each OOP concept appears in the project}
 \label{tab:oop-map}
-\small
-\begin{tabular}{@{}p{4.2cm}p{10.8cm}@{}}
+\footnotesize
+\begin{tabular}{@{}p{3.5cm}p{11.4cm}@{}}
 \toprule
 \textbf{Concept} & \textbf{Location in the code}\\
 \midrule
 Encapsulation & Private members and \texttt{const} getters in \texttt{BoundingBox}, \texttt{Frame}, \texttt{TrackedObject}\\
-Constructor overloading & \texttt{BoundingBox()} / \texttt{BoundingBox(x,y,w,h)}; \texttt{Frame()} / \texttt{Frame(img,n,t)}\\
-Default arguments & \texttt{MotionDetector}, \texttt{MotionAnalyzer}, \texttt{ObjectTracker}, \texttt{TrackedObject} constructors\\
+Constructors & \texttt{BoundingBox()} / \texttt{BoundingBox(x,y,w,h)}; \texttt{Frame()} / \texttt{Frame(img,n,t)}\\
+Default arguments & \texttt{MotionDetector}, \texttt{MotionAnalyzer}, \texttt{ObjectTracker}, \texttt{TrackedObject}\\
 Operator overloading & \texttt{BoundingBox::operator+} and \texttt{operator-}\\
 Composition & \texttt{ObjectTracker} $\rightarrow$ \texttt{TrackedObject} $\rightarrow$ \texttt{BoundingBox}; \texttt{Frame} $\rightarrow$ image copy\\
-Aggregation (shared ownership) & \texttt{MotionDetector} $\rightarrow$ \texttt{cv::Ptr<BackgroundSubtractor>}\\
-Abstraction / single responsibility & Seven classes with narrow public interfaces, coordinated by \texttt{main()}\\
+Aggregation & \texttt{MotionDetector} $\rightarrow$ \texttt{cv::Ptr<BackgroundSubtractor>} (shared ownership)\\
+Abstraction & Seven classes with narrow public interfaces, coordinated by \texttt{main()}\\
 Const-correctness & \texttt{const} member functions and \texttt{const} reference parameters throughout\\
-Polymorphism (via OpenCV) & \texttt{BackgroundSubtractor::apply()} called through a base-class smart pointer\\
-RAII / automatic resource management & \texttt{cv::Ptr}, \texttt{cv::Mat}, \texttt{std::map}, \texttt{std::vector}; no raw \texttt{new}/\texttt{delete}\\
+Polymorphism & \texttt{BackgroundSubtractor::apply()} called through a base-class smart pointer (OpenCV)\\
+RAII & \texttt{cv::Ptr}, \texttt{cv::Mat}, \texttt{std::map}, \texttt{std::vector}; no raw \texttt{new}/\texttt{delete}\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -644,8 +659,8 @@ Figure~\ref{fig:usecase} shows the interactions between the user, the video sour
 
 \begin{figure}[H]
 \centering
-\adjustbox{max width=\textwidth}{%
-\begin{tikzpicture}[
+\adjustbox{max width=\textwidth, max height=0.38\textheight}{%
+\begin{tikzpicture}[yscale=0.8,
   uc/.style={ellipse, draw, fill=blue!6, minimum height=1.1cm, text width=3.1cm, align=center, font=\scriptsize, inner sep=1pt},
   inc/.style={dashed, -{Stealth[length=5pt,open]}}
 ]
@@ -685,10 +700,10 @@ Figure~\ref{fig:usecase} shows the interactions between the user, the video sour
 \subsection{Sequence Diagram}
 Figure~\ref{fig:sequence} shows the messages exchanged while one frame is processed. \texttt{main()} reads the frame and wraps it in a \texttt{Frame}, asks the detector for bounding boxes, hands them to the tracker (which updates, creates or ages \texttt{TrackedObject}s), and finally, for every tracked object, calls the analyser and the visualiser, both of which talk to the \texttt{TrackedObject}.
 
-\begin{figure}[p]
+\begin{figure}[H]
 \centering
 \adjustbox{max width=\textwidth, max height=0.86\textheight}{%
-\begin{tikzpicture}[
+\begin{tikzpicture}[yscale=0.85,
   life/.style={draw, fill=blue!8, minimum width=2.2cm, minimum height=0.7cm, font=\scriptsize\ttfamily, align=center},
   frag/.style={draw, thick, gray!70!black},
   ftab/.style={draw, fill=white, font=\tiny\bfseries, inner sep=2pt, anchor=north west}
@@ -741,7 +756,7 @@ Figure~\ref{fig:sequence} shows the messages exchanged while one frame is proces
 \subsection{Activity Diagrams}
 Figure~\ref{fig:activity-main} describes the control flow of the application as a whole, and Figure~\ref{fig:activity-tracker} zooms into the matching logic inside \texttt{ObjectTracker::update()}.
 
-\begin{figure}[p]
+\begin{figure}[H]
 \centering
 \adjustbox{max width=\textwidth, max height=0.86\textheight}{%
 \begin{tikzpicture}[node distance=0.8cm]
@@ -826,7 +841,7 @@ Figure~\ref{fig:activity-main} describes the control flow of the application as 
 % =====================================================================
 
 \subsection{Motion Detection}
-\texttt{MotionDetector::detect()} turns a \texttt{Frame} into a list of bounding boxes in five steps.
+\texttt{MotionDetector::detect()} turns a \texttt{Frame} into a list of bounding boxes in five steps (Listing~\ref{lst:detect}).
 \begin{enumerate}
     \item \textbf{Background subtraction.} A MOG2 model (\texttt{cv::\allowbreak createBackground\allowbreak SubtractorMOG2()}, default parameters) is updated with the frame. MOG2 models each pixel as a mixture of Gaussians and marks it as background (0), shadow (127) or foreground (255).
     \item \textbf{Thresholding.} \texttt{cv::threshold(mask, mask, 200, 255, THRESH\_BINARY)} keeps only pixels that are clearly foreground. Because shadow pixels carry the value 127, they are discarded here.
@@ -835,6 +850,7 @@ Figure~\ref{fig:activity-main} describes the control flow of the application as 
     \item \textbf{Area filter.} Contours with \texttt{contourArea} below \texttt{minimumArea} are ignored; for the rest, \texttt{cv::boundingRect} gives the \texttt{BoundingBox}.
 \end{enumerate}
 
+\begin{minipage}{\linewidth}
 \begin{lstlisting}[caption={\texttt{MotionDetector::detect()} (core of the method).}, label={lst:detect}]
 cv::Mat foregroundMask;
 backgroundSubtractor->apply(image, foregroundMask);
@@ -856,6 +872,7 @@ for (const auto& contour : contours)
     detections.push_back(box);
 }
 \end{lstlisting}
+\end{minipage}
 
 \subsection{Object Tracking}
 The tracker uses the centroid of each box, 
@@ -866,8 +883,9 @@ and the Euclidean distance between an object's last centroid $\mathbf{c}_o$ and 
 \begin{equation}
 d(\mathbf{c}_o,\mathbf{c}_d) = \sqrt{(c_{o,x}-c_{d,x})^2 + (c_{o,y}-c_{d,y})^2}.
 \end{equation}
-In every frame, each existing object (taken in ascending ID order) selects the closest detection that has not been used yet. If $d < d_{\max}$ (80 pixels by default), the object is updated with that detection; otherwise its missed-frame counter is incremented. Detections left unmatched start new objects with the next free ID. Finally, objects whose counter exceeds the limit (5 frames by default) are erased from the map. This is a simple \emph{greedy nearest-neighbour} strategy.
+In every frame, each existing object (taken in ascending ID order) selects the closest detection that has not been used yet. If $d < d_{\max}$ (80 pixels by default), the object is updated with that detection; otherwise its missed-frame counter is incremented. Detections left unmatched start new objects with the next free ID. Finally, objects whose counter exceeds the limit (5 frames by default) are erased from the map. This is a simple \emph{greedy nearest-neighbour} strategy; the matching loop is shown in Listing~\ref{lst:match}.
 
+\begin{minipage}{\linewidth}
 \begin{lstlisting}[caption={Matching loop of \texttt{ObjectTracker::update()}.}, label={lst:match}]
 for (auto& pair : objects)
 {
@@ -896,14 +914,16 @@ for (auto& pair : objects)
     }
 }
 \end{lstlisting}
+\end{minipage}
 
 \subsection{Motion Analysis}
 From the previous and current centroids, the analyser computes the displacement $(\Delta x, \Delta y)$, the distance moved $s=\sqrt{\Delta x^2+\Delta y^2}$ and the speed
 \begin{equation}
 v = \frac{s}{\Delta t}\quad[\text{pixels/second}],
 \end{equation}
-where $\Delta t$ is the difference between the two video timestamps stored in the object (\texttt{getDeltaTime()}). Using real timestamps, instead of assuming a fixed frame rate, keeps the speed meaningful if the frame rate changes. The direction is decided by the dominant axis of motion and a movement threshold $\theta$ (2 pixels by default). Image $y$-coordinates grow downwards, so a negative $\Delta y$ means \texttt{UP}. The status is \texttt{MOVING} when $s>\theta$ and $v>0$, and otherwise \texttt{STATIONARY}, in which case the direction is also reset to \texttt{STATIONARY}.
+where $\Delta t$ is the difference between the two video timestamps stored in the object (\texttt{getDeltaTime()}). Using real timestamps, instead of assuming a fixed frame rate, keeps the speed meaningful if the frame rate changes. The direction is decided by the dominant axis of motion and a movement threshold $\theta$ (2 pixels by default). Image $y$-coordinates grow downwards, so a negative $\Delta y$ means \texttt{UP}. The status is \texttt{MOVING} when $s>\theta$ and $v>0$, and otherwise \texttt{STATIONARY}, in which case the direction is also reset to \texttt{STATIONARY} (Listing~\ref{lst:analyze}).
 
+\begin{minipage}{\linewidth}
 \begin{lstlisting}[caption={Direction and status logic of \texttt{MotionAnalyzer::analyze()}.}, label={lst:analyze}]
 std::string direction = "STATIONARY";
 if (std::abs(dx) > std::abs(dy)) {
@@ -920,6 +940,7 @@ if (status == "STATIONARY")
     direction = "STATIONARY";
 object.setMotion(speed, direction, status);
 \end{lstlisting}
+\end{minipage}
 
 \subsection{Visualisation and Display}
 \texttt{Visualizer::drawObject()} draws the green bounding box, the red centroid dot and a white label placed just above the box (clamped so it stays inside the image), and \texttt{drawTrajectory()} joins the stored centroids with blue line segments. Before display, \texttt{main()} computes a scale factor $\min\{1,\;1280/\text{width},\;720/\text{height}\}$ and shrinks large frames with \texttt{cv::INTER\_AREA}, so that high-resolution videos fit on screen. Each log line printed to the console has the format
@@ -928,6 +949,8 @@ object.setMotion(speed, direction, status);
 \end{center}
 
 \subsection{Configuration Parameters}
+The tunable parameters of each component and their default values are listed in Table~\ref{tab:params}.
+
 \begin{table}[H]
 \centering
 \caption{Tunable parameters and their default values}
@@ -951,8 +974,9 @@ Display limit & $1280\times720$ & Maximum size of the displayed window\\
 % =====================================================================
 \section{Build and Execution}
 % =====================================================================
-The project is configured with CMake. \texttt{CMakeLists.txt} sets C++17, requires MSVC, locates OpenCV 5 through \texttt{OpenCV\_DIR} (default \texttt{C:/opencv/build}) and links the eight source files into one executable. For Visual Studio debugging it also adds the OpenCV \texttt{bin} directory to the \texttt{PATH} and sets the working directory to the source folder, so that the default \texttt{Video.mp4} is found.
+The project is configured with CMake. \texttt{CMakeLists.txt} sets C++17, requires MSVC, locates OpenCV 5 through \texttt{OpenCV\_DIR} (default \texttt{C:/opencv/build}) and links the eight source files into one executable. For Visual Studio debugging it also adds the OpenCV \texttt{bin} directory to the \texttt{PATH} and sets the working directory to the source folder, so that the default \texttt{Video.mp4} is found. The commands used are shown in Listing~\ref{lst:build}.
 
+\begin{minipage}{\linewidth}
 \begin{lstlisting}[language={}, caption={Building and running the project (Developer PowerShell).}, label={lst:build}]
 cmake --preset msvc-x64
 cmake --build --preset msvc-debug
@@ -960,6 +984,7 @@ cmake --build --preset msvc-debug
 ObjectTrackingEngine.exe                 (plays Video.mp4)
 ObjectTrackingEngine.exe path\to\clip.mp4
 \end{lstlisting}
+\end{minipage}
 
 If the video cannot be opened, the program prints an error message and exits with code $-1$. While running, pressing \texttt{q} in the video window ends the program.
 
@@ -1000,7 +1025,7 @@ The program was tested on a traffic-camera clip showing a multi-lane road with a
 \begin{itemize}
     \item \textbf{Correct identities over time.} In the less crowded frames each vehicle keeps one ID and its trajectory follows the road lane, with a smooth path from the bottom of the image (nearer the camera) upwards.
     \item \textbf{Direction and status.} Most vehicles are labelled \texttt{MOVING UP}, matching the traffic direction, while the lane-changing taxi in Figure~\ref{fig:res-four} is reported as \texttt{MOVING RIGHT}, and the bus halted at the stop is reported as \texttt{STATIONARY}.
-    \item \textbf{Perspective effect.} Speeds are measured in image pixels. Because the camera looks down the road, objects near the bottom of the image cover more pixels per second than distant ones moving equally fast, so values are comparable only for the same image region.
+    \item \textbf{Perspective effect.} Speeds are measured in image pixels (for example, the nearer car in Figure~\ref{fig:res-two} shows a higher value than the farther one). Because the camera looks down the road, objects near the bottom of the image cover more pixels per second than distant ones moving equally fast, so values are comparable only for the same image region.
     \item \textbf{Challenging cases.} In Figure~\ref{fig:res-crowded}, a single car is covered by two boxes (IDs 77 and 80) and the label of ID~79 reads \texttt{MOVING STATIONARY}. The latter happens when the distance moved slightly exceeds the 2-pixel threshold while the dominant axis shows less than 2~pixels of motion, so the status becomes \texttt{MOVING} but no direction is assigned.
 \end{itemize}
 
