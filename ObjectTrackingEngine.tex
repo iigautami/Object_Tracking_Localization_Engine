@@ -25,6 +25,7 @@
 
 \geometry{margin=1in}
 \captionsetup{font=small,labelfont=bf,labelsep=colon,skip=6pt}
+\captionsetup[table]{position=bottom}
 % let text and floats share pages so no large blank areas remain
 \renewcommand{\topfraction}{0.95}
 \renewcommand{\bottomfraction}{0.95}
@@ -152,8 +153,7 @@ The development and runtime environment of the project is summarised in Table~\r
 
 \begin{table}[H]
 \centering
-\caption{Development and runtime environment}
-\label{tab:env}
+
 \small
 \begin{tabular}{@{}p{3.6cm}p{11cm}@{}}
 \toprule
@@ -167,6 +167,8 @@ Platform & Windows, x64\\
 Input & Any video format readable by OpenCV \texttt{videoio}; the demonstration uses a traffic-camera clip, \texttt{Video.mp4}\\
 \bottomrule
 \end{tabular}
+\caption{Development and runtime environment}
+\label{tab:env}
 \end{table}
 
 \subsection{Technology Stack}
@@ -174,8 +176,7 @@ Table~\ref{tab:stack} lists the technologies used to build and run the project, 
 
 \begin{table}[H]
 \centering
-\caption{Technology stack of the Object Tracking Engine}
-\label{tab:stack}
+
 \footnotesize
 \begin{tabular}{@{}p{2.7cm}p{4.2cm}p{8.1cm}@{}}
 \toprule
@@ -190,6 +191,8 @@ Platform & Windows, x64 & Target for the installed OpenCV libraries and DLLs.\\
 Input / output & \texttt{Video.mp4}; OpenCV window and console & Any format readable by OpenCV \texttt{videoio}; results shown live and logged (no video file saved).\\
 \bottomrule
 \end{tabular}
+\caption{Technology stack of the Object Tracking Engine}
+\label{tab:stack}
 \end{table}
 
 % =====================================================================
@@ -245,8 +248,7 @@ The program consists of seven classes. Table~\ref{tab:classes} summarises their 
 
 \begin{table}[H]
 \centering
-\caption{Classes and their responsibilities}
-\label{tab:classes}
+
 \small
 \begin{tabular}{@{}p{3.1cm}p{7.2cm}p{4.7cm}@{}}
 \toprule
@@ -261,6 +263,8 @@ The program consists of seven classes. Table~\ref{tab:classes} summarises their 
 \texttt{Visualizer} & Draws the box, centroid, label and trajectory of an object onto a frame. & \texttt{TrackedObject}\\
 \bottomrule
 \end{tabular}
+\caption{Classes and their responsibilities}
+\label{tab:classes}
 \end{table}
 
 \begin{figure}[H]
@@ -629,8 +633,7 @@ backgroundSubtractor->apply(image, foregroundMask);   // virtual call
 
 \begin{table}[H]
 \centering
-\caption{Where each OOP concept appears in the project}
-\label{tab:oop-map}
+
 \footnotesize
 \begin{tabular}{@{}p{3.5cm}p{11.4cm}@{}}
 \toprule
@@ -648,6 +651,8 @@ Polymorphism & \texttt{BackgroundSubtractor::apply()} called through a base-clas
 RAII & \texttt{cv::Ptr}, \texttt{cv::Mat}, \texttt{std::map}, \texttt{std::vector}; no raw \texttt{new}/\texttt{delete}\\
 \bottomrule
 \end{tabular}
+\caption{Where each OOP concept appears in the project}
+\label{tab:oop-map}
 \end{table}
 
 % =====================================================================
@@ -665,8 +670,8 @@ Figure~\ref{fig:usecase} shows the interactions between the user, the video sour
   inc/.style={dashed, -{Stealth[length=5pt,open]}}
 ]
 % system boundary
-\draw[rounded corners=4pt, thick] (2.2,-5.2) rectangle (12.4,7.0);
-\node[font=\small\bfseries, anchor=north] at (7.3,6.95) {Object Tracking Engine};
+\draw[rounded corners=4pt, thick] (-1.2,-5.4) rectangle (16.0,7.0);
+\node[font=\small\bfseries, anchor=north] at (7.4,6.95) {Object Tracking Engine};
 % actors
 \stickman{0.3}{1.2}{User}
 \stickman{14.3}{6.1}{Video file}
@@ -715,7 +720,7 @@ Figure~\ref{fig:sequence} shows the messages exchanged while one frame is proces
 \node[life] (to)   at (8.7,0)  {:TrackedObject};
 \node[life] (ma)   at (11.6,0) {:MotionAnalyzer};
 \node[life] (vi)   at (14.5,0) {:Visualizer};
-\foreach \n in {main,md,ot,to,ma,vi} \draw[dashed, gray] (\n.south) -- ++(0,-22.6);
+\foreach \n in {main,md,ot,to,ma,vi} \draw[dashed, gray] (\n.south) -- ++(0,-26.6);
 % 1. read frame and build Frame
 \sself{0}{-1.0}{video.read(image);\\Frame frame(image, n, ts)}
 % 2. detect
@@ -724,32 +729,42 @@ Figure~\ref{fig:sequence} shows the messages exchanged while one frame is proces
 \sret{2.9}{0}{-4.2}{detections}
 % 3. tracker update
 \smsg{0}{5.8}{-5.2}{update(detections, timestamp)}
-\draw[frag] (5.0,-5.7) rectangle (9.5,-9.4);
-\node[ftab] at (5.0,-5.7) {loop};
-\node[font=\tiny, anchor=north west] at (5.55,-5.7) {[for each object / detection]};
-\smsg{5.8}{8.7}{-6.9}{update(box, ts)\\{[matched]}}
-\smsg{5.8}{8.7}{-7.9}{incrementMissedFrames()\\{[no match]}}
-\smsg{5.8}{8.7}{-8.9}{\guillemotleft create\guillemotright (id, box, ts)\\{[unmatched detection]}}
-\sself{5.8}{-9.8}{erase if missed\\$>$ maxMissedFrames}
+% loop over existing objects, with alt (matched / not matched)
+\draw[frag] (4.9,-5.8) rectangle (9.6,-9.5);
+\node[ftab] at (4.9,-5.8) {loop};
+\node[font=\tiny, anchor=north west] at (5.45,-5.8) {[for each existing object]};
+\draw[frag] (5.1,-6.4) rectangle (9.4,-9.2);
+\node[ftab] at (5.1,-6.4) {alt};
+\node[font=\tiny, anchor=north west] at (5.6,-6.4) {[match found]};
+\smsg{5.8}{8.7}{-7.4}{update(box, ts)}
+\draw[frag, dashed] (5.1,-8.0) -- (9.4,-8.0);
+\node[font=\tiny, anchor=south west] at (5.2,-8.0) {[else]};
+\smsg{5.8}{8.7}{-8.8}{incrementMissedFrames()}
+% loop over unmatched detections
+\draw[frag] (4.9,-9.9) rectangle (9.6,-11.6);
+\node[ftab] at (4.9,-9.9) {loop};
+\node[font=\tiny, anchor=north west] at (5.45,-9.9) {[for each unmatched detection]};
+\smsg{5.8}{8.7}{-11.1}{\guillemotleft create\guillemotright (id, box, ts)}
+\sself{5.8}{-12.3}{erase if missed\\$>$ maxMissedFrames}
 % 4. get objects
-\smsg{0}{5.8}{-11.2}{getObjects()}
-\sret{5.8}{0}{-12.0}{map<int, TrackedObject>\&}
+\smsg{0}{5.8}{-13.7}{getObjects()}
+\sret{5.8}{0}{-14.5}{map<int, TrackedObject>\&}
 % 5. per-object processing
-\draw[frag] (-0.8,-12.7) rectangle (15.4,-21.9);
-\node[ftab] at (-0.8,-12.7) {loop};
-\node[font=\tiny, anchor=north west] at (-0.25,-12.7) {[for each (id, object) in map]};
-\smsg{0}{11.6}{-13.9}{analyze(object, deltaTime)}
-\smsg{11.6}{8.7}{-14.8}{getPreviousCentroid()\\getCurrentCentroid()}
-\smsg{11.6}{8.7}{-15.9}{setMotion(speed,\\direction, status)}
-\smsg{0}{14.5}{-17.0}{drawObject(image, object)}
-\smsg{14.5}{8.7}{-17.9}{getBoundingBox(), getCurrentCentroid(),\\getID(), getStatus(), getDirection(), getSpeed()}
-\smsg{0}{14.5}{-19.0}{drawTrajectory(image, object)}
-\smsg{14.5}{8.7}{-19.8}{getTrajectory()}
-\smsg{0}{8.7}{-21.0}{console log: getID(), getCurrentCentroid(), getSpeed(),\\getDirection(), getStatus(), getMissedFrames()}
+\draw[frag] (-0.8,-15.2) rectangle (15.4,-24.4);
+\node[ftab] at (-0.8,-15.2) {loop};
+\node[font=\tiny, anchor=north west] at (-0.25,-15.2) {[for each (id, object) in map]};
+\smsg{0}{11.6}{-16.4}{analyze(object, deltaTime)}
+\smsg{11.6}{8.7}{-17.3}{getPreviousCentroid()\\getCurrentCentroid()}
+\smsg{11.6}{8.7}{-18.4}{setMotion(speed,\\direction, status)}
+\smsg{0}{14.5}{-19.5}{drawObject(image, object)}
+\smsg{14.5}{8.7}{-20.4}{getBoundingBox(), getCurrentCentroid(),\\getID(), getStatus(), getDirection(), getSpeed()}
+\smsg{0}{14.5}{-21.5}{drawTrajectory(image, object)}
+\smsg{14.5}{8.7}{-22.3}{getTrajectory()}
+\smsg{0}{8.7}{-23.5}{console log: getID(), getCurrentCentroid(), getSpeed(),\\getDirection(), getStatus(), getMissedFrames()}
 % 6. display
-\sself{0}{-22.3}{cv::resize(); cv::imshow();\\cv::waitKey(1)}
+\sself{0}{-25.6}{cv::resize(); cv::imshow();\\cv::waitKey(1)}
 \end{tikzpicture}}
-\caption{Sequence diagram for processing one video frame (simplified: object creation and the missed-frame bookkeeping are shown for one object only).}
+\caption{Sequence diagram for processing one video frame (simplified: for one tracked object).}
 \label{fig:sequence}
 \end{figure}
 
@@ -953,8 +968,7 @@ The tunable parameters of each component and their default values are listed in 
 
 \begin{table}[H]
 \centering
-\caption{Tunable parameters and their default values}
-\label{tab:params}
+
 \small
 \begin{tabular}{@{}p{4.1cm}p{2.4cm}p{8.5cm}@{}}
 \toprule
@@ -969,6 +983,8 @@ Morphology kernel & $5\times5$ & Rectangular kernel for opening and closing\\
 Display limit & $1280\times720$ & Maximum size of the displayed window\\
 \bottomrule
 \end{tabular}
+\caption{Tunable parameters and their default values}
+\label{tab:params}
 \end{table}
 
 % =====================================================================
